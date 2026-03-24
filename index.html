@@ -525,6 +525,8 @@ input[readonly]{color:var(--green);border-color:rgba(0,204,102,.2);background:rg
 
 </div>
 </div> 
+
+
 <!-- ═══ PHASE 1 ═══ -->
 <div class="tp" id="tab-p1">
 
@@ -556,38 +558,46 @@ input[readonly]{color:var(--green);border-color:rgba(0,204,102,.2);background:rg
 
       <div class="sec-div">— Investigation Tasks —</div>
 
+      <!-- 1 -->
       <p class="bt"><strong>1. The Pattern</strong></p>
       <p class="bt">
         Six deaths. Different cities. Different circumstances.<br>
-        And yet — something ties them together.
+        And yet — there are clear similarities if you look closely.
       </p>
       <p class="bt">
-        • Find the three common threads that link every victim
+        • Identify what project the victims are connected to<br>
+        • Find actions that stand out due to their low frequency in the logs<br>
+        • Pay attention to when this activity occurs<br>
+        • What are the three common elements shared across all victims?
       </p>
 
+      <!-- 2 -->
       <p class="bt" style="margin-top:12px;"><strong>2. The Environment Pattern</strong></p>
       <p class="bt">
-        Examine the environmental records linked to this activity.
+        The key may lie in what changed around the victims, not the victims themselves.
       </p>
       <p class="bt">
-        • What changes are observed in the system conditions?<br>
-        • How do these variations explain the different reported causes of death?
+        • Use the activity you identified earlier as a starting point<br>
+        • Look for environmental entries that reflect similar system behavior<br>
+        • Check how those changes were triggered<br>
+        • Observe the temperature and oxygen values in those cases<br>
+        • Do they stay normal, or do they change unusually?
       </p>
 
-      <p class="bt" style="margin-top:12px;"><strong>3. The Connection</strong></p>
+      <!-- 3 -->
+      <p class="bt" style="margin-top:12px;"><strong>3. The Conclusion</strong></p>
       <p class="bt">
-        Using all available data, determine what links the victims together.
+        Everything has been labeled as “natural causes.”<br>
+        But you’ve already uncovered key patterns and environmental changes.
       </p>
       <p class="bt">
-        • What system ties them to these events?<br>
-        • Who is associated with the triggering activity?
+        • Using only those findings, do you believe the official explanation is correct?<br>
+        • If not, what truly happened?
       </p>
 
     </div>
 
   </div><!-- /p1-content -->
-
-</div><!-- /tab-p1 -->
 
 </div><!-- /tab-p1 -->
 <!-- ═══ PHASE 2 ═══ -->
@@ -719,12 +729,13 @@ input[readonly]{color:var(--green);border-color:rgba(0,204,102,.2);background:rg
       <p class="bt">
         • system_override_logs.csv<br>
         • corrupted_logs.json<br>
-        • encrypted_fragment.txt
+        • communication_logs.csv
       </p>
 
       <div class="sec-div">— Investigation Tasks —</div>
 
-      <p class="bt"><strong>1. Override Analysis</strong></p>
+      <!-- 1 -->
+      <p class="bt"><strong>1. Override Logs</strong></p>
       <p class="bt">
         The system keeps a record of every override ever made.<br>
         Most are routine maintenance.<br>
@@ -734,6 +745,7 @@ input[readonly]{color:var(--green);border-color:rgba(0,204,102,.2);background:rg
         • Load the override logs and find them
       </p>
 
+      <!-- 2 -->
       <p class="bt" style="margin-top:12px;"><strong>2. Data Corruption</strong></p>
       <p class="bt">
         After the incident someone went back into the system and started deleting entries.<br>
@@ -743,54 +755,63 @@ input[readonly]{color:var(--green);border-color:rgba(0,204,102,.2);background:rg
         • Open the file and find out how much is gone
       </p>
 
-      <p class="bt" style="margin-top:12px;"><strong>3. Encrypted Fragment</strong></p>
+      <!-- 3 -->
+      <p class="bt" style="margin-top:12px;"><strong>3. Encrypted Messages</strong></p>
       <p class="bt">
-        A fragment was recovered from NODE-ECHO after the crash. It was encoded.<br>
-        Someone tried to hide it inside two fake system reports.
+        During Phase 2, several communication logs stood out — not because of what they said openly,<br>
+        but because some messages were hidden.<br>
+        A few of those logs contain encoded fragments that were never meant to be read directly.
       </p>
       <p class="bt">
-        • Decode all 3 fragments and find the one that is real
+        • Revisit the communication logs and uncover hidden data<br>
+        • Decode the encrypted messages and identify which one contains meaningful information<br>
+        • One will clearly stand out — identify the killer
       </p>
 
+      <!-- HINTS -->
       <div class="sec-div">— Hints —</div>
 
       <div class="hlist">
 
+        <!-- Hint 1 -->
         <div class="hrow lk" id="h-p3-0">
           <div class="hi">💡</div>
           <div class="htw">
             <div class="hl">Hint 1</div>
             <div class="hc blur">
-              Filter the logs where critical is True.<br>
-              Sort by timestamp.<br>
-              Read the notes column in order.
+              • Filter the logs where critical is True<br>
+              • Sort by timestamp<br>
+              • Read the notes column in order
             </div>
           </div>
           <span class="hbg lk">Locked</span>
         </div>
 
+        <!-- Hint 2 -->
         <div class="hrow lk" id="h-p3-1">
           <div class="hi">💡</div>
           <div class="htw">
             <div class="hl">Hint 2</div>
             <div class="hc blur">
-              Load the JSON file.<br>
-              Compare expected entries to present.<br>
-              Subtract to find what is missing.<br>
-              Check which node was tampered most.
+              • Load the JSON file<br>
+              • Compare expected entries to present<br>
+              • Subtract to find what is missing<br>
+              • Check which node was tampered most
             </div>
           </div>
           <span class="hbg lk">Locked</span>
         </div>
 
+        <!-- Hint 3 -->
         <div class="hrow lk" id="h-p3-2">
           <div class="hi">💡</div>
           <div class="htw">
             <div class="hl">Hint 3</div>
             <div class="hc blur">
-              Read the file and find all FRAGMENT lines.<br>
-              Decode each one using BASE64.<br>
-              Two will sound like system reports.
+              • Revisit the communication logs from Phase 2<br>
+              • Identify encoded/structured messages<br>
+              • Decode using Base64<br>
+              • One will clearly stand out — identify the killer
             </div>
           </div>
           <span class="hbg lk">Locked</span>
@@ -981,7 +1002,7 @@ var HINTS = {
   'p3': [
   'Filter the logs where critical is True. Sort by timestamp. Read the notes column in order.',
   'Load the JSON file. Compare expected entries to present. Subtract to find what is missing. Check which node was tampered most.',
-  'Read the file and find all FRAGMENT lines. Decode each one using BASE64. Two will sound like system reports.'
+  'Revisit the communication logs from Phase 2. Identify encoded or structured messages. Decode them using Base64. One will clearly stand out — identify the killer.'
 ],
 };
 
@@ -1026,10 +1047,10 @@ function T(n,b){
 // ═══════════════════════════════════════════════
 // OPTION 1 → fixed clock time
 var evS = new Date();
-evS.setHours(20, 0, 0, 0);   // START TIME (EDIT)
+evS.setHours(18, 0, 0, 0);   // START TIME (EDIT)
 
 var evE = new Date();
-evE.setHours(23, 30, 0, 0);  // END TIME (EDIT)
+evE.setHours(21, 30, 0, 0);  // END TIME (EDIT)
 var evStartStr='', evEndStr=''; // raw strings from sheet
 var eventLocked=false;          // once event starts, never reset times
 var revealedHints={};           // once revealed, never hide
