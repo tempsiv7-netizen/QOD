@@ -1007,4 +1007,278 @@ function tryPhase(ph, btn){
   if(!phaseUnlocked[ph]){
     // Shake the button to indicate locked
     btn.style.transform='translateX(-4px)';
-    setTimeout(f
+    setTimeout(function(){btn.style.transform='translateX(4px)';},80);
+    setTimeout(function(){btn.style.transform='translateX(-3px)';},160);
+    setTimeout(function(){btn.style.transform='translateX(0)';},240);
+    return;
+  }
+  T(ph, btn);
+}
+
+function setPhaseUnlock(ph, unlock){
+  phaseUnlocked[ph] = unlock;
+  var btn = document.getElementById('tb-'+ph);
+  var lockedDiv   = document.getElementById(ph+'-locked');
+  var contentDiv  = document.getElementById(ph+'-content');
+  if(!btn) return;
+  if(unlock){
+    btn.classList.remove('locked');
+    btn.querySelector('.lock-icon').textContent = '';
+    if(lockedDiv)  lockedDiv.style.display  = 'none';
+    if(contentDiv) contentDiv.style.display = 'block';
+  } else {
+    btn.classList.add('locked');
+    btn.querySelector('.lock-icon').textContent = '🔒';
+    if(lockedDiv)  lockedDiv.style.display  = 'flex';
+    if(contentDiv) contentDiv.style.display = 'none';
+  }
+}
+
+function tickEvent(){
+  var now=new Date();
+  var dot   = document.getElementById('ev-dot');
+  var stEl  = document.getElementById('ev-st');
+  var sEl   = document.getElementById('ev-s');
+  var eEl   = document.getElementById('ev-e');
+  var elEl  = document.getElementById('ev-el');
+  var c2    = document.getElementById('cd2');
+  var sub   = document.getElementById('ev-sub-lbl');
+
+  if(!evS || !evE){
+    stEl.textContent = 'Not Started';
+    c2.textContent   = '--:--:--';
+    sEl.textContent  = '--:--';
+    eEl.textContent  = '--:--';
+    elEl.textContent = '--:--:--';
+    sub.textContent  = 'Waiting for organizer to set time…';
+    dot.className    = 'sdot off';
+    updatePhaseBar(-1);
+    return;
+  }
+
+  // Always display start / end from sheet
+  sEl.textContent = fmtHM(evS);
+  eEl.textContent = fmtHM(evE);
+
+  if(now < evS){
+    // ── NOT STARTED ── show time to start
+    var toStart = Math.floor((evS - now) / 1000);
+    stEl.textContent = 'Not Started';
+    c2.textContent   = fmtSec(toStart);
+    sub.textContent  = 'Starts in ' + pad2(Math.floor(toStart/3600)) + 'h ' + pad2(Math.floor((toStart%3600)/60)) + 'm ' + pad2(toStart%60) + 's';
+    elEl.textContent = '00:00:00';
+    dot.className    = 'sdot wait';
+    updatePhaseBar(-1);
+    return;
+  }
+
+  if(now >= evE){
+    // ── ENDED — keep showing times ──
+    var totalDur = Math.floor((evE - evS) / 1000);
+    stEl.textContent = 'Ended';
+    sEl.textContent  = fmtHM(evS);
+    eEl.textContent  = fmtHM(evE);
+    c2.textContent   = '00:00:00';
+    sub.textContent  = 'Event ended · Total: ' + Math.floor(totalDur/60) + ' mins';
+    elEl.textContent = fmtSec(totalDur);
+    dot.className    = 'sdot end';
+    updatePhaseBar(4);
+    return;
+  }
+
+  // ── LIVE ── smooth, no flicker
+  var elapsed = Math.floor((now - evS) / 1000);
+  var remain  = Math.floor((evE - now) / 1000);
+  var rm      = Math.floor(remain / 60);
+
+  dot.className    = 'sdot live';
+  stEl.textContent = 'Live';
+  elEl.textContent = fmtSec(elapsed);
+  c2.textContent   = fmtSec(remain);
+
+  // Phase detection based on remaining minutes
+  var phase = 0;
+  if(rm >= 110){
+    phase = 1;
+    sub.textContent = 'Phase 1 · ' + pad2(Math.floor(remain/3600)) + ':' + pad2(Math.floor((remain%3600)/60)) + ':' + pad2(remain%60) + ' remaining';
+  } else if(rm >= 60){
+    phase = 2;
+    sub.textContent = 'Phase 2 · ' + pad2(Math.floor(remain/3600)) + ':' + pad2(Math.floor((remain%3600)/60)) + ':' + pad2(remain%60) + ' remaining';
+  } else {
+    phase = 3;
+    sub.textContent = 'Phase 3 · ' + pad2(Math.floor(remain/3600)) + ':' + pad2(Math.floor((remain%3600)/60)) + ':' + pad2(remain%60) + ' remaining';
+  }
+  updatePhaseBar(phase);
+}
+
+setInterval(tickEvent, 1000);
+
+function updatePhaseBar(phase){
+  var p1=document.getElementById('ph1');
+  var p2=document.getElementById('ph2');
+  var p3=document.getElementById('ph3');
+  p1.className='ph-seg'; p2.className='ph-seg'; p3.className='ph-seg';
+  if(phase===1){p1.className='ph-seg active';}
+  else if(phase===2){p1.className='ph-seg done';p2.className='ph-seg active';}
+  else if(phase===3){p1.className='ph-seg done';p2.className='ph-seg done';p3.className='ph-seg active';}
+  else if(phase===4){p1.className='ph-seg done';p2.className='ph-seg done';p3.className='ph-seg done';}
+}
+
+// ═══════════════════════════════════════════════
+// GOOGLE SHEETS — poll every 5 seconds
+// ═══════════════════════════════════════════════
+function poll(){
+  // Fetch config directly from Apps Script doGet — no CORS issues
+  fetch(SCRIPT_URL + '?action=config&_=' + Date.now())
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(data && data.config){
+        var cfg = {};
+        Object.keys(data.config).forEach(function(k){
+          cfg[k.toLowerCase()] = String(data.config[k]).toLowerCase().trim();
+        });
+        applyConfig(cfg);
+        setSR('ok','Google Sheets connected · syncing every 5s');
+      } else {
+        setSR('no','No config data received — check Apps Script');
+      }
+    })
+    .catch(function(err){
+      setSR('no','Cannot reach Google Sheets — click Refresh');
+    });
+}
+
+function parseTime(str){
+  str = str.trim();
+  var ampm = '';
+  if(str.toLowerCase().indexOf('am')!==-1){ ampm='am'; str=str.toLowerCase().replace('am','').trim(); }
+  else if(str.toLowerCase().indexOf('pm')!==-1){ ampm='pm'; str=str.toLowerCase().replace('pm','').trim(); }
+  var parts = str.split(':');
+  var h = parseInt(parts[0])||0;
+  var m = parseInt(parts[1])||0;
+  if(ampm==='am' && h===12) h=0;
+  if(ampm==='pm' && h!==12) h+=12;
+  return {h:h, m:m};
+}
+
+function applyConfig(c){
+  var newStart = c['event_start'] ? String(c['event_start']).trim() : '';
+  var newEnd   = c['event_end']   ? String(c['event_end']).trim()   : '';
+
+ 
+  // Lock times once event has started
+  if(evS && new Date() >= evS) eventLocked = true;
+
+  // Phase unlock
+  ['p1','p2','p3'].forEach(function(ph){
+    var val = c['phase'+ph.charAt(1)];
+    setPhaseUnlock(ph, (val==='yes'));
+  });
+
+  // Hints
+  ['p1','p2','p3'].forEach(function(ph){
+    [0,1,2].forEach(function(i){
+      var key = ph+'_hint'+(i+1);
+      setHint(ph, i, (c[key]==='yes'));
+    });
+  });
+}
+
+function setHint(ph,i,on){
+  var el=document.getElementById('h-'+ph+'-'+i);
+  if(!el) return;
+  var hc=el.querySelector('.hc');
+  var hbg=el.querySelector('.hbg');
+  var key=ph+'-'+i;
+  hc.textContent=HINTS[ph][i];
+  if(on) revealedHints[key]=true;
+  if(revealedHints[key]){
+    el.classList.remove('lk'); el.classList.add('rv');
+    hc.classList.remove('blur'); hc.classList.add('show');
+    hbg.textContent='Revealed'; hbg.className='hbg rv';
+  } else {
+    el.classList.add('lk'); el.classList.remove('rv');
+    hc.classList.add('blur'); hc.classList.remove('show');
+    hbg.textContent='Locked'; hbg.className='hbg lk';
+  }
+}
+
+function setSR(state,msg){
+  var el=document.getElementById('sr');
+  if(!el) return;
+  el.className='sr '+state;
+  el.innerHTML='<div class="sd"></div><span>'+msg+'</span>';
+}
+
+function manualRefresh(){
+  var btn=document.getElementById('rbtn');
+  btn.classList.add('spinning');
+  poll();
+  setTimeout(function(){btn.classList.remove('spinning');},700);
+}
+
+// Start polling every 5 seconds
+poll();
+setInterval(poll,5000);
+
+// ═══════════════════════════════════════════════
+// SUBMISSIONS
+// ═══════════════════════════════════════════════
+function doSubmit(){
+  var team  = document.getElementById('s-team').value.trim();
+  var phase = document.getElementById('s-phase').value;
+  var ans   = document.getElementById('s-a').value.trim();
+
+  if(!phase){alert('Select a phase before transmitting.');return;}
+  if(!team){alert('Enter your team name.');return;}
+  if(!ans){alert('Your report is empty. Enter your findings.');return;}
+
+  // Capture system time at moment of submission
+  var t = nowReadable();
+  document.getElementById('s-t').value = t;
+
+  var entry = {
+    team:  team,
+    phase: phase,
+    t:     t,
+    ans:   ans,
+    iso:   new Date().toISOString()
+  };
+
+  fetch(SCRIPT_URL,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(entry)
+  }).catch(function(){});
+
+  showToast();
+  document.getElementById('s-a').value='';
+  document.getElementById('s-t').value='';
+}
+
+  
+function showVictim(key){
+  var modal = document.getElementById('vp-modal');
+  var img   = document.getElementById('vp-img');
+  img.src   = VICTIM_IMGS[key];
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeVictim(){
+  document.getElementById('vp-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVictim();});
+</script>
+
+<!-- VICTIM PROFILE MODAL -->
+<div id="vp-modal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;animation:fdi .3s ease;" onclick="if(event.target===this)closeVictim()">
+  <div style="position:relative;max-width:520px;width:90%;max-height:90vh;overflow-y:auto;border-radius:4px;box-shadow:0 0 60px rgba(192,57,43,.25);">
+    <button onclick="closeVictim()" style="position:fixed;top:20px;right:24px;background:var(--red2);border:none;border-radius:2px;color:#fff;font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:3px;padding:8px 16px;cursor:pointer;z-index:9001;">✕ CLOSE</button>
+    <img id="vp-img" src="" alt="Victim Profile" style="width:100%;display:block;border-radius:4px;"/>
+  </div>
+</div>
+
+</body>
+</html>
