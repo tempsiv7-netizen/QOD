@@ -23,16 +23,19 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 @keyframes gb1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,50px)}}
 @keyframes gb2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-40px)}}
 
+
+.vp-btn{background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.35);border-radius:2px;color:var(--red2);font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:3px;text-transform:uppercase;padding:5px 12px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.vp-btn:hover{background:rgba(192,57,43,.2);box-shadow:0 0 12px rgba(192,57,43,.2);}
+
 /* ── STATUS BAR ── */
 .sbar{position:relative;z-index:20;background:rgba(0,0,0,0.55);border-bottom:1px solid var(--border2);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;}
 .sbi{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px;}
 .sbi .v{color:var(--text);}
 .sdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.sdot.live{background:var(--green);animation:safe 2s ease-in-out infinite;}
-.sdot.wait{background:var(--amber);animation:safe 2s ease-in-out infinite;}
+.sdot.live{background:var(--green);}
+.sdot.wait{background:var(--amber);}
 .sdot.end{background:var(--red2);}
 .sdot.off{background:var(--muted);}
-@keyframes safe{0%,100%{box-shadow:0 0 0 0 rgba(0,204,102,.5)}50%{box-shadow:0 0 0 5px transparent}}
 .refresh-btn{background:none;border:1px solid rgba(0,170,255,.2);border-radius:2px;color:var(--accent);padding:4px 12px;font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:2px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:background .2s;}
 .refresh-btn:hover{background:rgba(0,170,255,.1);}
 .refresh-icon{display:inline-block;}
@@ -79,6 +82,16 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .tbtn.on{color:var(--accent);border-bottom-color:var(--accent);}
 .tp{display:none;} .tp.on{display:block;}
 
+/* ── PHASE LOCK ── */
+.tbtn.locked{color:var(--muted2) !important;cursor:not-allowed;border-bottom-color:transparent !important;opacity:.5;}
+.tbtn.locked:hover{color:var(--muted2) !important;}
+.tbtn .lock-icon{font-size:.7rem;margin-left:4px;vertical-align:middle;}
+.phase-locked{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;gap:18px;text-align:center;}
+.pl-icon{font-size:3rem;opacity:.25;}
+.pl-title{font-family:'Special Elite',cursive;font-size:1.1rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);text-shadow:none;}
+.pl-msg{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);line-height:2;}
+.pl-badge{display:inline-block;padding:6px 18px;border:1px solid rgba(192,57,43,.2);background:rgba(192,57,43,.04);border-radius:2px;font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--red2);}
+
 /* ── CARDS ── */
 .pcard{background:var(--panel);border:1px solid var(--border);border-radius:2px;padding:26px 28px;margin-bottom:18px;position:relative;overflow:hidden;}
 .pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--accent),transparent 60%);opacity:.3;}
@@ -87,7 +100,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .pcard.blu-l{border-left:2px solid var(--accent);}
 .pcard.grn-l{border-left:2px solid var(--green);}.pcard.grn-l::before{background:linear-gradient(90deg,var(--green),transparent 60%);opacity:.3;}
 .ctitle{font-family:'Special Elite',cursive;font-size:1.1rem;letter-spacing:3px;text-transform:uppercase;color:#cde;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
-.bt{font-size:.78rem;line-height:1.9;color:var(--text);margin-bottom:12px;letter-spacing:.5px;}
+.bt{font-size:.88rem;line-height:2.0;color:var(--text);margin-bottom:12px;letter-spacing:.5px;}
 hr.dv{border:none;border-top:1px solid var(--border2);margin:16px 0;}
 .hlb{border-radius:2px;padding:13px 17px;font-size:.68rem;letter-spacing:1px;margin:12px 0;line-height:1.8;}
 .hlb.rd{background:rgba(192,57,43,.05);border:1px solid rgba(192,57,43,.25);color:var(--red2);}
@@ -130,15 +143,15 @@ hr.dv{border:none;border-top:1px solid var(--border2);margin:16px 0;}
 .dc{background:var(--panel2);border:1px solid var(--border2);border-radius:2px;padding:14px;transition:border-color .2s,box-shadow .2s;}
 .dc:hover{border-color:var(--border);box-shadow:0 0 16px rgba(0,170,255,.06);}
 .di{font-size:1.2rem;margin-bottom:6px;}
-.dn{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:#cde;margin-bottom:6px;}
-.df{font-size:.6rem;color:var(--muted);line-height:1.7;}
+.dn{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:#cde;margin-bottom:6px;}
+.df{font-size:.68rem;color:var(--muted);line-height:1.7;}
 .df span{display:inline-block;background:rgba(0,170,255,.04);border:1px solid var(--border2);border-radius:1px;padding:1px 5px;margin:2px 2px 0 0;font-size:.58rem;}
 .dl-single{display:inline-flex;align-items:center;gap:10px;margin:12px 0 4px;padding:11px 24px;background:rgba(0,170,255,.06);border:1px solid rgba(0,170,255,.25);border-radius:2px;color:var(--accent);font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;text-decoration:none;transition:all .2s;}
 .dl-single:hover{background:rgba(0,170,255,.12);box-shadow:0 0 20px rgba(0,170,255,.12);transform:translateY(-1px);}
 
 /* ── QUESTIONS ── */
 .ql{list-style:none;margin:10px 0;}
-.ql li{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--border2);font-size:.76rem;color:var(--text);line-height:1.6;align-items:flex-start;letter-spacing:.5px;}
+.ql li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border2);font-size:.86rem;color:var(--text);line-height:1.6;align-items:flex-start;letter-spacing:.5px;}
 .ql li:last-child{border-bottom:none;}
 .qn{font-size:.62rem;letter-spacing:3px;color:var(--accent);min-width:24px;margin-top:2px;text-transform:uppercase;}
 
@@ -151,9 +164,9 @@ hr.dv{border:none;border-top:1px solid var(--border2);margin:16px 0;}
 .hi{font-size:1rem;flex-shrink:0;}
 .htw{flex:1;}
 .hl{font-size:.55rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
-.hc{font-size:.75rem;letter-spacing:.5px;transition:all .4s;color:var(--muted);}
+.hc{font-size:.85rem;letter-spacing:.5px;transition:all .4s;color:var(--muted);}
 .hc.blur{filter:blur(5px);user-select:none;}
-.hc.show{color:var(--accent);font-size:.72rem;letter-spacing:2px;filter:none;}
+.hc.show{color:var(--accent);font-size:.82rem;letter-spacing:2px;filter:none;}
 .hbg{font-size:.55rem;letter-spacing:3px;text-transform:uppercase;padding:4px 10px;border-radius:1px;white-space:nowrap;flex-shrink:0;}
 .hbg.lk{background:rgba(255,255,255,.03);color:var(--muted);border:1px solid var(--border2);}
 .hbg.rv{background:rgba(0,204,102,.08);color:var(--green);border:1px solid rgba(0,204,102,.25);}
@@ -170,50 +183,26 @@ input[type="text"],input[type="time"],select,textarea{background:rgba(0,0,0,.4);
 input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(0,170,255,.07);}
 textarea{min-height:85px;}
 select option{background:var(--panel);}
-.sbtn{background:var(--red2);border:none;border-radius:2px;color:#fff;font-family:'Share Tech Mono',monospace;font-size:.72rem;letter-spacing:4px;text-transform:uppercase;padding:12px 34px;cursor:pointer;transition:all .2s;margin-top:9px;}
-.sbtn:hover{background:var(--red);box-shadow:0 0 20px rgba(192,57,43,.35);transform:translateY(-1px);}
+input[readonly]{color:var(--green);border-color:rgba(0,204,102,.2);background:rgba(0,204,102,.02);cursor:default;}
+
+/* SUBMIT BUTTON — themed */
+.sbtn{background:var(--red2);border:none;border-radius:2px;color:#fff;font-family:'Share Tech Mono',monospace;font-size:.72rem;letter-spacing:4px;text-transform:uppercase;padding:13px 36px;cursor:pointer;transition:all .2s;margin-top:9px;position:relative;overflow:hidden;}
+.sbtn::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);transform:translateX(-100%);transition:transform .4s;}
+.sbtn:hover{background:var(--red);box-shadow:0 0 24px rgba(192,57,43,.45),0 0 60px rgba(192,57,43,.15);transform:translateY(-1px);}
+.sbtn:hover::before{transform:translateX(100%);}
 .gsi{display:inline-flex;align-items:center;gap:8px;font-size:.6rem;letter-spacing:2px;color:var(--muted);margin-top:11px;}
-.gsd{width:6px;height:6px;border-radius:50%;background:var(--green);animation:safe 2s ease-in-out infinite;}
-
-/* ── LOG ── */
-.twrap{background:var(--panel);border:1px solid var(--border);border-radius:2px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,.4);}
-table{width:100%;border-collapse:collapse;}
-thead tr{background:linear-gradient(90deg,rgba(0,170,255,.06),transparent);border-bottom:1px solid var(--border);}
-thead th{font-size:.52rem;letter-spacing:4px;text-transform:uppercase;color:var(--muted);padding:12px 16px;text-align:left;font-weight:400;}
-tbody tr{border-bottom:1px solid var(--border2);transition:background .15s;}
-tbody tr:last-child{border-bottom:none;}
-tbody tr:hover{background:rgba(0,170,255,.02);}
-td{padding:11px 16px;font-size:.82rem;vertical-align:middle;letter-spacing:.5px;}
-.ts{color:var(--accent);font-size:.72rem;letter-spacing:2px;}
-.tg{display:inline-block;padding:2px 8px;border-radius:1px;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;}
-.tg1{background:rgba(244,162,97,.08);color:var(--amber);border:1px solid rgba(244,162,97,.2);}
-.tg2{background:rgba(0,170,255,.06);color:var(--accent);border:1px solid rgba(0,170,255,.18);}
-.tg3{background:rgba(0,204,102,.06);color:var(--green);border:1px solid rgba(0,204,102,.18);}
-.ac{max-width:260px;line-height:1.5;}
-.empty-r{text-align:center;padding:44px;color:var(--muted);font-size:.72rem;letter-spacing:2px;}
-.sr{display:flex;align-items:center;gap:8px;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
-.sr .sd{width:6px;height:6px;border-radius:50%;}
-.sr.ok .sd{background:var(--green);} .sr.ok{color:var(--green);}
-.sr.no .sd{background:var(--warn);}  .sr.no{color:var(--warn);}
-.sr.ld .sd{background:var(--amber);animation:safe 1.5s infinite;} .sr.ld{color:var(--amber);}
-
-/* ── ALERT OVERLAY ── */
-.ao{display:none;position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.9);align-items:center;justify-content:center;}
-.ao.show{display:flex;animation:fdi .35s ease;}
-@keyframes fdi{from{opacity:0;}to{opacity:1;}}
-.ab{background:var(--panel);border:2px solid var(--red2);border-radius:2px;padding:42px 48px;text-align:center;max-width:500px;position:relative;overflow:hidden;box-shadow:0 0 80px rgba(192,57,43,.2);}
-.ab::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(192,57,43,.07),transparent 65%);pointer-events:none;}
-.ask{font-size:3rem;display:block;margin-bottom:14px;animation:ep 1.6s ease-in-out infinite;}
-@keyframes ep{0%,100%{filter:drop-shadow(0 0 8px var(--red2));transform:scale(1);}50%{filter:drop-shadow(0 0 24px var(--red2));transform:scale(1.08);}}
-.atb{font-family:'Special Elite',cursive;font-size:.85rem;letter-spacing:4px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
-.att{font-family:'Special Elite',cursive;font-size:1.8rem;letter-spacing:4px;text-transform:uppercase;color:var(--red2);margin-bottom:10px;}
-.amsg{font-size:.75rem;color:var(--text);line-height:1.9;margin-bottom:20px;letter-spacing:.5px;}
-.acl{background:var(--red2);border:none;border-radius:2px;color:#fff;font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:4px;text-transform:uppercase;padding:10px 24px;cursor:pointer;transition:all .2s;}
-.acl:hover{background:var(--red);box-shadow:0 0 16px rgba(192,57,43,.4);}
+.gsd{width:6px;height:6px;border-radius:50%;background:var(--green);}
 
 /* ── TOAST ── */
 .toast{position:fixed;bottom:24px;right:24px;background:rgba(0,170,255,.08);border:1px solid rgba(0,170,255,.25);border-radius:2px;padding:10px 20px;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--blue2);opacity:0;transform:translateY(8px);transition:all .35s;pointer-events:none;z-index:9999;}
 .toast.show{opacity:1;transform:translateY(0);}
+
+/* ── SHEETS STATUS ── */
+.sr{display:flex;align-items:center;gap:8px;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.sr .sd{width:6px;height:6px;border-radius:50%;}
+.sr.ok .sd{background:var(--green);} .sr.ok{color:var(--green);}
+.sr.no .sd{background:var(--warn);}  .sr.no{color:var(--warn);}
+.sr.ld .sd{background:var(--amber);} .sr.ld{color:var(--amber);}
 </style>
 </head>
 <body>
@@ -245,7 +234,7 @@ td{padding:11px 16px;font-size:.82rem;vertical-align:middle;letter-spacing:.5px;
     <div class="tc blue-t">
       <div class="tci">
         <div class="tcl">⏳ Event Time Remaining</div>
-        <div class="tcs" id="ev-sub">Waiting for organizer to set time…</div>
+        <div class="tcs" id="ev-sub-lbl">Waiting for organizer to set time…</div>
       </div>
       <div class="tcv" id="cd2">--:--:--</div>
     </div>
@@ -253,230 +242,719 @@ td{padding:11px 16px;font-size:.82rem;vertical-align:middle;letter-spacing:.5px;
 
   <!-- PHASE PROGRESS BAR -->
   <div class="phase-bar" id="phase-bar">
-    <div class="ph-seg" id="ph1">Phase 1 · 40 min</div>
+    <div class="ph-seg" id="ph1">Phase 1 · 50 min</div>
     <div class="ph-seg" id="ph2">Phase 2 · 50 min</div>
-    <div class="ph-seg" id="ph3">Phase 3 · 60 min</div>
+    <div class="ph-seg" id="ph3">Phase 3 · 50 min</div>
   </div>
 
   <!-- TABS -->
   <div class="sec-div">— Investigation Portal —</div>
   <nav class="tabs">
-    <button class="tbtn on" onclick="T('story',this)">📖 Case Brief</button>
-    <button class="tbtn"    onclick="T('p1',this)">Phase 1</button>
-    <button class="tbtn"    onclick="T('p2',this)">Phase 2</button>
-    <button class="tbtn"    onclick="T('p3',this)">Phase 3</button>
-    <button class="tbtn"    onclick="T('sub',this)">Submit Answer</button>
-    <button class="tbtn"    onclick="T('log',this)" id="ltb">Log</button>
-  </nav>
+  <button class="tbtn on" onclick="T('story',this)"
+    style="font-weight:700;color:#fff;text-shadow:0 0 6px rgba(255,255,255,0.4);">
+    📖 Case Brief
+  </button>
+
+  <button class="tbtn locked" id="tb-p1" onclick="tryPhase('p1',this)"
+    style="font-weight:700;color:#e0f2ff;text-shadow:0 0 6px rgba(0,170,255,0.6);">
+    Phase 1 <span class="lock-icon">🔒</span>
+  </button>
+
+  <button class="tbtn locked" id="tb-p2" onclick="tryPhase('p2',this)"
+    style="font-weight:700;color:#e0f2ff;text-shadow:0 0 6px rgba(0,170,255,0.6);">
+    Phase 2 <span class="lock-icon">🔒</span>
+  </button>
+
+  <button class="tbtn locked" id="tb-p3" onclick="tryPhase('p3',this)"
+    style="font-weight:700;color:#e0f2ff;text-shadow:0 0 6px rgba(0,170,255,0.6);">
+    Phase 3 <span class="lock-icon">🔒</span>
+  </button>
+
+  <button class="tbtn" onclick="T('sub',this)"
+    style="font-weight:700;color:#fff;text-shadow:0 0 6px rgba(255,255,255,0.4);">
+    File Your Report
+  </button>
+</nav>
 
   <!-- ═══ STORY ═══ -->
   <div class="tp on" id="tab-story">
-    <div class="pcard red-l">
-      <div class="ctitle">◈ The Investigation</div>
-      <p class="bt">You are a digital forensic analyst for <strong style="color:#cde">Tesseract Labs</strong> — a globally distributed enterprise across Chennai, Mumbai, Bangalore, New York, Paris, and more. Over five months, six employees died under officially "unexplained" circumstances. No injuries. No forced entry. No toxins. Each case closed as natural causes.</p>
-      <div class="hlb rd">⏰ Every victim had a system trigger event between <strong>02:15 AM – 02:20 AM</strong> prior to death.<br>The trigger is not the moment of death — it is the moment of environmental manipulation.</div>
-      <hr class="dv">
-      <div class="sec-div">— Project ECHO — The Vector —</div>
-      <p class="bt">A distributed smart environment system controlling HVAC and oxygen regulation, server room cooling, lab environmental systems, and personal smart devices via API — managed centrally across all global locations.</p>
-      <div class="hlb am">Modus Operandi: Trigger ~02:17 AM → gradual O₂ decrease + temperature deviation → alerts suppressed → delayed physiological failure → death appears natural. No physical evidence.</div>
-    </div>
+<div class="pcard red-l">
 
-    <div class="pcard">
-      <div class="ctitle">◈ Timeline of Events</div>
-      <div class="tl">
-        <div class="tli"><div class="tll"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlm">Month 1</div><div class="tlc">First death — isolated, no suspicion raised.</div></div></div>
-        <div class="tli"><div class="tll"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlm">Month 2</div><div class="tlc">Two additional deaths in different cities. No connection drawn.</div></div></div>
-        <div class="tli"><div class="tll"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlm">Month 3</div><div class="tlc">Fourth death triggers internal concern. Audit initiated.</div></div></div>
-        <div class="tli"><div class="tll"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlm">Month 4</div><div class="tlc">Fifth death. Audit formally escalated.</div></div></div>
-        <div class="tli"><div class="tll"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlm">Month 5</div><div class="tlc">Sixth death confirms anomaly pattern. Forensic review begins.</div></div></div>
-      </div>
-    </div>
+  <div class="ctitle">◈ Case Overview</div>
 
-    <div class="pcard">
-      <div class="ctitle">◈ Victims</div>
-      <div class="eg">
-        <div class="ec"><div class="en">Stefan Salvatore</div><div class="er">Backend Engineer</div><div class="el">📍 Bangalore · Apartment</div><span class="eca">Cardiac arrest</span></div>
-        <div class="ec"><div class="en">Klaus Mikaelson</div><div class="er">Infrastructure Engineer</div><div class="el">📍 Chennai · Lab</div><span class="eca">Heat stress</span></div>
-        <div class="ec"><div class="en">Ross Geller</div><div class="er">Data Analyst</div><div class="el">📍 New York · Apartment</div><span class="eca">Hypoxia</span></div>
-        <div class="ec"><div class="en">Jeremiah Fisher</div><div class="er">Security Engineer</div><div class="el">📍 Mumbai · Server Room</div><span class="eca">System fatigue</span></div>
-        <div class="ec"><div class="en">Blair Waldorf</div><div class="er">ML Researcher</div><div class="el">📍 Paris · Testing Pod</div><span class="eca">Oxygen deficiency</span></div>
-        <div class="ec"><div class="en">Serena Van der Woodsen</div><div class="er">Data Auditor</div><div class="el">📍 Hyderabad · Apartment</div><span class="eca">Cardiac arrest</span></div>
-      </div>
-      <div class="hlb cy" style="margin-top:14px;">Different cities · environments · causes · 5-month gap → <strong>No connection visible without the data.</strong></div>
-    </div>
+  <p class="bt">At first, it didn’t raise concern.</p>
+  <p class="bt">One employee died — unfortunate, but not unusual.</p>
+  <p class="bt">Then another. Then more.</p>
+  <p class="bt">By the time anyone began to question the pattern, the number had risen to six.</p>
 
-    <div class="pcard red-l">
-      <div class="ctitle">◈ Next Target — Urgent</div>
-      <div class="hlb rd">🎯 <strong>Will Byers</strong> — Lead Data Scientist, Project ECHO<br>Upcoming trigger · ~02:17 AM<br><br>One of the last active senior contributors. Maintains system architecture. Linked to legacy modifications.<br><br>Solve this before the trigger fires — or Will Byers becomes the seventh victim.</div>
-    </div>
+  <div class="ctitle" style="margin-top:16px;">◈ Common Link</div>
 
-    <div class="pcard" style="text-align:center;padding:32px 28px;">
-      <div class="sec-div">— Dataset Package —</div>
-      <p class="bt" style="margin-bottom:20px;color:var(--muted);">All datasets for all three phases are bundled in one package.<br>Download once — use throughout the event.</p>
-      <a class="dl-single" href="https://raw.githubusercontent.com/tempsiv7-netizen/ab/main/all_datasets_v3.zip" download style="margin:0 auto;">⬇ &nbsp;Download All Datasets</a>
-      <p style="margin-top:16px;font-size:.57rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;line-height:2;">
-        Phase 1: victim_profiles · environment_logs · system_trigger_logs · device_registry<br>
-        Phase 2: employee_registry · communication_logs · financial_logs · entry_logs<br>
-        Phase 3: system_override_logs · corrupted_logs · encrypted_fragment
-      </p>
-    </div>
+  <p class="bt">All victims shared one connection:</p>
+  <ul class="bt" style="margin-left:16px;">
+    <li>Employed at <strong style="color:#cde">Tesseract Labs</strong></li>
+    <li>Connected to a high-level internal project</li>
+  </ul>
+
+  <p class="bt">Beyond this, no clear pattern emerged:</p>
+  <ul class="bt" style="margin-left:16px;">
+    <li>Different roles</li>
+    <li>Different locations</li>
+    <li>Different circumstances</li>
+  </ul>
+
+  <div class="ctitle" style="margin-top:16px;">◈ Investigation Findings</div>
+
+  <div class="hlb rd">
+    No signs of struggle.<br>
+    No evidence of intrusion.<br>
+    No detectable substances.
   </div>
 
-  <!-- ═══ PHASE 1 ═══ -->
-  <div class="tp" id="tab-p1">
+  <p class="bt" style="margin-top:10px;">Every report concluded:</p>
+  <div class="hlb rd"><strong>"Natural causes."</strong></div>
+
+  <div class="ctitle" style="margin-top:16px;">◈ Analysis Directive</div>
+
+  <p class="bt">
+    The consistency across all cases suggests deliberate design rather than coincidence.
+  </p>
+  <p class="bt">
+    Based on the data available, these deaths must be treated as connected.
+  </p>
+
+  <div class="hlb rd">
+    Your objective is clear:<br>
+    <strong>Identify the killer and establish proof using verifiable evidence.</strong>
+  </div>
+
+  <p class="bt" style="margin-top:12px;">
+    This investigation must move beyond assumptions. Every detail, every anomaly,
+    and every connection must be examined.
+  </p>
+
+  <p class="bt">
+    Because if this is not stopped now, there will be more victims.
+  </p>
+
+</div>
+
+   <div class="pcard">
+
+  <div class="ctitle">◈ Evidence & Data Registry</div>
+
+  <div class="tl">
+
+    <div class="tli">
+      <div class="tll"><div class="tld"></div><div class="tlln"></div></div>
+      <div class="tlc">
+        <strong>employee_registry.csv</strong><br>
+        1000 employees — names, roles, access levels, departments, and project assignments.<br>
+        <span class="muted">Contains all suspects, victims, and the killer.</span>
+      </div>
+    </div>
+
+    <div class="tli">
+      <div class="tll"><div class="tld"></div><div class="tlln"></div></div>
+      <div class="tlc">
+        <strong>system_trigger_logs.csv</strong><br>
+        3010 system activity logs tracking all server actions.<br>
+        <span class="muted">Rare <b>ENV_ADJUST</b> events provide the first clue.</span>
+      </div>
+    </div>
+
+    <div class="tli">
+      <div class="tll"><div class="tld"></div><div class="tlln"></div></div>
+      <div class="tlc">
+        <strong>environment_logs.csv</strong><br>
+        8972 sensor readings — temperature, oxygen, air quality.<br>
+        <span class="muted"><b>NODE-ECHO Lab</b> reveals the pattern.</span>
+      </div>
+    </div>
+
+    <div class="tli">
+      <div class="tll"><div class="tld"></div><div class="tlln"></div></div>
+      <div class="tlc">
+        <strong>device_registry.csv</strong><br>
+        1200 registered employee devices.<br>
+        <span class="muted">Confirms remote access to ECHO systems.</span>
+      </div>
+    </div>
+
+    <div class="tli">
+      <div class="tll"><div class="tld"></div><div class="tlln"></div></div>
+      <div class="tlc">
+        <strong>communication_logs.csv</strong><br>
+        8773 internal messages between employees.<br>
+        <span class="muted">Ignored warnings and hidden encoded messages.</span>
+      </div>
+    </div>
+
+    <div class="tli">
+      <div class="tll"><div class="tld"></div><div class="tlln"></div></div>
+      <div class="tlc">
+        <strong>financial_logs.csv</strong><br>
+        4808 transactions analyzed.<br>
+        <span class="muted">Flagged payments expose motive and connections.</span>
+      </div>
+    </div>
+
+    <div class="tli">
+      <div class="tll"><div class="tld"></div><div class="tlln"></div></div>
+      <div class="tlc">
+        <strong>entry_logs.csv</strong><br>
+        9500 badge access records across facilities.<br>
+        <span class="muted">One employee has zero entries — critical anomaly.</span>
+      </div>
+    </div>
+
+    <div class="tli">
+      <div class="tll"><div class="tld"></div><div class="tlln"></div></div>
+      <div class="tlc">
+        <strong>system_override_logs.csv</strong><br>
+        1457 override actions recorded.<br>
+        <span class="muted">7 critical overrides — all by one individual.<br>
+        Indicates a 72-hour kill sequence.</span>
+      </div>
+    </div>
+
+    <div class="tli">
+      <div class="tll"><div class="tld"></div><div class="tlln"></div></div>
+      <div class="tlc">
+        <strong>corrupted_logs.json</strong><br>
+        750 expected entries — only 702 remain.<br>
+        <span class="muted">48 deleted, 39 timestamps altered.<br>
+        Evidence of deliberate tampering.</span>
+      </div>
+    </div>
+
+    <div class="tli">
+      <div class="tll"><div class="tld"></div><div class="tlln"></div></div>
+      <div class="tlc">
+        <strong>encrypted_fragment.txt</strong><br>
+        3 fragments recovered from NODE-ECHO.<br>
+        <span class="muted">Only one is real — reveals the killer, time, and command executed.</span>
+      </div>
+    </div>
+
+    <div class="tli">
+      <div class="tll"><div class="tld"></div></div>
+      <div class="tlc">
+        <strong>victim_profiles.csv</strong><br>
+        6 confirmed deaths — all linked to Project ECHO.<br>
+        <span class="muted">Each victim was close to uncovering the truth.<br>
+        One more individual is still at risk.</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+<div class="pcard" style="text-align:center;padding:32px 28px;">
+
+  <div class="sec-div">— Dataset Package —</div>
+
+  <p class="bt" style="margin-bottom:20px;color:var(--muted);">
+    All datasets for all three phases are bundled in one package.<br>
+    Download once — use throughout the event.
+  </p>
+
+  <!-- Download Button -->
+  <a href="https://raw.githubusercontent.com/tempsiv7-netizen/ab/main/final_dataset.zip" 
+     download
+     style="
+       display:inline-block;
+       margin:20px 0;
+       padding:14px 28px;
+       font-size:.9rem;
+       font-weight:600;
+       letter-spacing:1px;
+       color:#fff;
+       background:linear-gradient(135deg,#ff3c3c,#ff7a18);
+       border-radius:8px;
+       text-decoration:none;
+       box-shadow:0 6px 18px rgba(255,60,60,0.4);
+       transition:all .25s ease;
+     "
+     onmouseover="this.style.transform='translateY(-2px) scale(1.03)';this.style.boxShadow='0 10px 24px rgba(255,60,60,0.6)';"
+     onmouseout="this.style.transform='none';this.style.boxShadow='0 6px 18px rgba(255,60,60,0.4)';"
+  >
+    ⬇ Download Full Dataset
+  </a>
+
+  <p style="margin-top:16px;font-size:.57rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;line-height:2;">
+    Phase 1: victim_profiles · environment_logs · system_trigger_logs · device_registry<br>
+    Phase 2: employee_registry · communication_logs · financial_logs · entry_logs<br>
+    Phase 3: system_override_logs · corrupted_logs · encrypted_fragment
+  </p>
+
+</div>
+</div> 
+
+<!-- ═══ PHASE 1 ═══ -->
+<div class="tp" id="tab-p1">
+
+  <!-- LOCKED STATE -->
+  <div id="p1-locked" class="phase-locked">
+    <div class="pl-icon">🔒</div>
+    <div class="pl-title">Phase 1 — Classified</div>
+    <div class="pl-msg">This phase has not been unlocked yet.<br>Stand by for organizer clearance.</div>
+    <span class="pl-badge">⛔ Access Denied</span>
+  </div>
+
+  <!-- UNLOCKED CONTENT -->
+  <div id="p1-content" style="display:none;">
+
     <div class="pcard amb-l">
-      <div class="phdr"><span class="pb pb1">Phase 1</span><span class="pd">40 min · Identify cause of death and connection</span></div>
+
+      <div class="phdr">
+        <span class="pb pb1">Phase 1</span>
+        <span class="pd">40 min · Identify patterns, environment shifts, and connections</span>
+      </div>
+
       <div class="sec-div">— Datasets —</div>
-      <div class="dg">
-        <div class="dc"><div class="di">📄</div><div class="dn">victim_profiles.csv</div><div class="df"><span>victim_id</span><span>name</span><span>role</span><span>location</span><span>city</span><span>time_of_death</span><span>last_system_access</span><span>project_id</span></div></div>
-        <div class="dc"><div class="di">📄</div><div class="dn">environment_logs.csv</div><div class="df"><span>timestamp</span><span>location</span><span>city</span><span>temperature</span><span>oxygen_level</span><span>air_quality_index</span></div></div>
-        <div class="dc"><div class="di">📄</div><div class="dn">system_trigger_logs.csv</div><div class="df"><span>trigger_id</span><span>timestamp</span><span>system_node</span><span>action_type</span></div></div>
-        <div class="dc"><div class="di">📄</div><div class="dn">device_registry.csv</div><div class="df"><span>device_id</span><span>owner_id</span><span>device_type</span><span>location</span><span>system_connected</span></div></div>
-      </div>
-      <div class="sec-div">— Questions —</div>
-      <ul class="ql">
-        <li><span class="qn">Q1</span>What system event is common across all victims?</li>
-        <li><span class="qn">Q2</span>When does this event occur?</li>
-        <li><span class="qn">Q3</span>What environmental changes are observed in the data?</li>
-        <li><span class="qn">Q4</span>Why are the causes of death different across victims?</li>
-        <li><span class="qn">Q5</span>What is the actual cause of death?</li>
-        <li><span class="qn">Q6</span>What connects all six victims?</li>
-      </ul>
-      <div class="sec-div">— Hints <span style="font-size:.55rem;color:var(--muted);margin-left:4px;">organizer reveals via Google Sheets</span> —</div>
-      <div class="hlist">
-        <div class="hrow lk" id="h-p1-0"><div class="hi">💡</div><div class="htw"><div class="hl">Hint 1</div><div class="hc blur">The cause is not the moment of death.</div></div><span class="hbg lk">Locked</span></div>
-        <div class="hrow lk" id="h-p1-1"><div class="hi">💡</div><div class="htw"><div class="hl">Hint 2</div><div class="hc blur">The system acts before the outcome.</div></div><span class="hbg lk">Locked</span></div>
-        <div class="hrow lk" id="h-p1-2"><div class="hi">💡</div><div class="htw"><div class="hl">Hint 3</div><div class="hc blur">Location does not define the connection.</div></div><span class="hbg lk">Locked</span></div>
-      </div>
+      <p class="bt">
+        • victim_profiles.csv<br>
+        • environment_logs.csv<br>
+        • system_trigger_logs.csv<br>
+        • device_registry.csv
+      </p>
+
+      <div class="sec-div">— Investigation Tasks —</div>
+
+      <p class="bt"><strong>1. The Pattern</strong></p>
+      <p class="bt">
+        Six deaths. Different cities. Different circumstances.<br>
+        And yet — something ties them together.
+      </p>
+      <p class="bt">
+        • Find the three common threads that link every victim
+      </p>
+
+      <p class="bt" style="margin-top:12px;"><strong>2. The Environment Pattern</strong></p>
+      <p class="bt">
+        Examine the environmental records linked to this activity.
+      </p>
+      <p class="bt">
+        • What changes are observed in the system conditions?<br>
+        • How do these variations explain the different reported causes of death?
+      </p>
+
+      <p class="bt" style="margin-top:12px;"><strong>3. The Connection</strong></p>
+      <p class="bt">
+        Using all available data, determine what links the victims together.
+      </p>
+      <p class="bt">
+        • What system ties them to these events?<br>
+        • Who is associated with the triggering activity?
+      </p>
+
     </div>
+
+  </div><!-- /p1-content -->
+
+</div><!-- /tab-p1 -->
+
+</div><!-- /tab-p1 -->
+<!-- ═══ PHASE 2 ═══ -->
+<div class="tp" id="tab-p2">
+
+  <div id="p2-locked" class="phase-locked">
+    <div class="pl-icon">🔒</div>
+    <div class="pl-title">Phase 2 — Classified</div>
+    <div class="pl-msg">Complete Phase 1 to gain access.<br>Organizer will unlock when ready.</div>
+    <span class="pl-badge">⛔ Access Denied</span>
   </div>
 
-  <!-- ═══ PHASE 2 ═══ -->
-  <div class="tp" id="tab-p2">
+  <div id="p2-content" style="display:none;">
+
     <div class="pcard blu-l">
-      <div class="phdr"><span class="pb pb2">Phase 2</span><span class="pd">50 min · Identify suspects and motives</span></div>
+
+      <div class="phdr">
+        <span class="pb pb2">Phase 2</span>
+        <span class="pd">50 min · Identify suspects and motives</span>
+      </div>
+
       <div class="sec-div">— Datasets —</div>
-      <div class="dg">
-        <div class="dc"><div class="di">📄</div><div class="dn">employee_registry.csv</div><div class="df"><span>employee_id</span><span>name</span><span>role</span><span>department</span><span class>access_level</span><span>status</span></div></div>
-        <div class="dc"><div class="di">📄</div><div class="dn">communication_logs.csv</div><div class="df"><span>sender_id</span><span>receiver_id</span><span>message</span><span>timestamp</span></div></div>
-        <div class="dc"><div class="di">📄</div><div class="dn">financial_logs.csv</div><div class="df"><span>employee_id</span><span>amount</span><span>timestamp</span><span>description</span></div></div>
-        <div class="dc"><div class="di">📄</div><div class="dn">entry_logs.csv</div><div class="df"><span>employee_id</span><span>location</span><span>entry_time</span></div></div>
-      </div>
-      <div class="sec-div">— Questions —</div>
-      <ul class="ql">
-        <li><span class="qn">Q1</span>Who has system-level access to Project ECHO?</li>
-        <li><span class="qn">Q2</span>Who appears in records during trigger windows (02:15–02:20 AM)?</li>
-        <li><span class="qn">Q3</span>Who has an identifiable motive?</li>
-        <li><span class="qn">Q4</span>Who shows suspicious behavior in the communication logs?</li>
-        <li><span class="qn">Q5</span>Who can be eliminated and why?</li>
-        <li><span class="qn">Q6</span>List your final suspects with justification.</li>
-      </ul>
-      <div class="sec-div">— Hints <span style="font-size:.55rem;color:var(--muted);margin-left:4px;">organizer reveals via Google Sheets</span> —</div>
+      <p class="bt">
+        • employee_registry.csv<br>
+        • communication_logs.csv<br>
+        • financial_logs.csv<br>
+        • entry_logs.csv
+      </p>
+
+      <div class="sec-div">— Investigation Tasks —</div>
+
+      <p class="bt"><strong>1. Capability</strong></p>
+      <p class="bt">
+        The audit team confirms that Project ECHO was not breached.<br>
+        There were no signs of forced entry, no external intrusion attempts, and no system vulnerabilities exploited.<br>
+        This wasn’t an attack from the outside.<br>
+        Someone with legitimate access used the system exactly as it was designed to be used.
+      </p>
+      <p class="bt">
+        Your task is to identify who within the organization even has the capability to interact with such critical systems.
+      </p>
+
+      <p class="bt" style="margin-top:12px;"><strong>2. Communication Patterns</strong></p>
+      <p class="bt">
+        Internal communications were reviewed during the investigation.<br>
+        Most conversations appear routine — system checks, status updates, and daily operations.<br>
+        However, a few exchanges stand out.<br>
+        Some employees were unusually active.<br>
+        Others mentioned irregularities in the system before the incidents occurred.<br>
+        Activity alone doesn’t mean intent.<br>
+        But patterns in communication can reveal more than direct evidence.
+      </p>
+      <p class="bt">
+        Your task is to identify which employees stand out — and more importantly, why.
+      </p>
+
+      <p class="bt" style="margin-top:12px;"><strong>3. Financial Signals</strong></p>
+      <p class="bt">
+        Financial records were also flagged during the audit.<br>
+        Several employees show irregular transactions — unusual amounts, flagged entries, and external links.<br>
+        At first glance, this suggests possible motive.<br>
+        But not every suspicious trail leads to the truth.<br>
+        Some anomalies may be distractions… or something else entirely.
+      </p>
+      <p class="bt">
+        Your task is to determine whether these financial patterns actually connect to the incident — or if they mislead the investigation.
+      </p>
+
+      <div class="sec-div">— Hints —</div>
+
       <div class="hlist">
-        <div class="hrow lk" id="h-p2-0"><div class="hi">💡</div><div class="htw"><div class="hl">Hint 1</div><div class="hc blur">Access defines capability.</div></div><span class="hbg lk">Locked</span></div>
-        <div class="hrow lk" id="h-p2-1"><div class="hi">💡</div><div class="htw"><div class="hl">Hint 2</div><div class="hc blur">Motive does not guarantee action.</div></div><span class="hbg lk">Locked</span></div>
-        <div class="hrow lk" id="h-p2-2"><div class="hi">💡</div><div class="htw"><div class="hl">Hint 3</div><div class="hc blur">Visibility can mislead.</div></div><span class="hbg lk">Locked</span></div>
+
+        <div class="hrow lk" id="h-p2-0">
+          <div class="hi">💡</div>
+          <div class="htw">
+            <div class="hl">Hint 1</div>
+            <div class="hc blur">Identify the subset of employees with elevated privileges by filtering on access level.</div>
+          </div>
+          <span class="hbg lk">Locked</span>
+        </div>
+
+        <div class="hrow lk" id="h-p2-1">
+          <div class="hi">💡</div>
+          <div class="htw">
+            <div class="hl">Hint 2</div>
+            <div class="hc blur">Analyze the content of messages to identify keywords or patterns related to system activity.</div>
+          </div>
+          <span class="hbg lk">Locked</span>
+        </div>
+
+        <div class="hrow lk" id="h-p2-2">
+          <div class="hi">💡</div>
+          <div class="htw">
+            <div class="hl">Hint 3</div>
+            <div class="hc blur">Apply conditional filtering to isolate high-value or flagged transactions.</div>
+          </div>
+          <span class="hbg lk">Locked</span>
+        </div>
+
       </div>
+
     </div>
+
+  </div><!-- /p2-content -->
+
+</div><!-- /tab-p2 -->
+
+
+<!-- ═══ PHASE 3 ═══ -->
+<div class="tp" id="tab-p3">
+
+  <div id="p3-locked" class="phase-locked">
+    <div class="pl-icon">🔒</div>
+    <div class="pl-title">Phase 3 — Classified</div>
+    <div class="pl-msg">Complete Phase 2 to gain access.<br>Organizer will unlock when ready.</div>
+    <span class="pl-badge">⛔ Access Denied</span>
   </div>
 
-  <!-- ═══ PHASE 3 ═══ -->
-  <div class="tp" id="tab-p3">
+  <div id="p3-content" style="display:none;">
+
     <div class="pcard grn-l">
-      <div class="phdr"><span class="pb pb3">Phase 3 — Final</span><span class="pd">60 min · Identify the killer and motive</span></div>
+
+      <div class="phdr">
+        <span class="pb pb3">Phase 3 — Final</span>
+        <span class="pd">60 min · Identify the killer and motive</span>
+      </div>
+
       <div class="sec-div">— Datasets —</div>
-      <div class="dg">
-        <div class="dc"><div class="di">📄</div><div class="dn">system_override_logs.csv</div><div class="df"><span>override_id</span><span>timestamp</span><span>source_id</span><span>system_node</span></div></div>
-        <div class="dc"><div class="di">📄</div><div class="dn">corrupted_logs.json</div><div class="df"><span>missing entries</span><span>overwritten timestamps</span></div></div>
-        <div class="dc"><div class="di">🔐</div><div class="dn">encrypted_fragment.txt</div><div class="df">Encoded string — decode to reveal identity.</div></div>
-      </div>
-      <div class="sec-div">— Questions —</div>
-      <ul class="ql">
-        <li><span class="qn">Q1</span>What anomaly exists in the system override logs?</li>
-        <li><span class="qn">Q2</span>What data is missing or altered in the corrupted logs?</li>
-        <li><span class="qn">Q3</span>Who should appear in operational logs but does not?</li>
-        <li><span class="qn">Q4</span>Decode the encrypted fragment — what does it reveal?</li>
-        <li><span class="qn">Q5</span>Identify the killer with full evidence.</li>
-        <li><span class="qn">Q6</span>Explain the motive in full.</li>
-      </ul>
-      <div class="sec-div">— Hints <span style="font-size:.55rem;color:var(--muted);margin-left:4px;">organizer reveals via Google Sheets</span> —</div>
+      <p class="bt">
+        • system_override_logs.csv<br>
+        • corrupted_logs.json<br>
+        • encrypted_fragment.txt
+      </p>
+
+      <div class="sec-div">— Investigation Tasks —</div>
+
+      <p class="bt"><strong>1. Override Analysis</strong></p>
+      <p class="bt">
+        The system keeps a record of every override ever made.<br>
+        Most are routine maintenance.<br>
+        But buried inside are a few that should never have happened.
+      </p>
+      <p class="bt">
+        • Load the override logs and find them
+      </p>
+
+      <p class="bt" style="margin-top:12px;"><strong>2. Data Corruption</strong></p>
+      <p class="bt">
+        After the incident someone went back into the system and started deleting entries.<br>
+        The corruption report captured what was there before — and what is missing now.
+      </p>
+      <p class="bt">
+        • Open the file and find out how much is gone
+      </p>
+
+      <p class="bt" style="margin-top:12px;"><strong>3. Encrypted Fragment</strong></p>
+      <p class="bt">
+        A fragment was recovered from NODE-ECHO after the crash. It was encoded.<br>
+        Someone tried to hide it inside two fake system reports.
+      </p>
+      <p class="bt">
+        • Decode all 3 fragments and find the one that is real
+      </p>
+
+      <div class="sec-div">— Hints —</div>
+
       <div class="hlist">
-        <div class="hrow lk" id="h-p3-0"><div class="hi">💡</div><div class="htw"><div class="hl">Hint 1</div><div class="hc blur">Perfect data indicates manipulation.</div></div><span class="hbg lk">Locked</span></div>
-        <div class="hrow lk" id="h-p3-1"><div class="hi">💡</div><div class="htw"><div class="hl">Hint 2</div><div class="hc blur">Absence is evidence.</div></div><span class="hbg lk">Locked</span></div>
-        <div class="hrow lk" id="h-p3-2"><div class="hi">💡</div><div class="htw"><div class="hl">Hint 3</div><div class="hc blur">The killer is not visible.</div></div><span class="hbg lk">Locked</span></div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ═══ SUBMIT ═══ -->
-  <div class="tp" id="tab-sub">
-    <div class="fc">
-      <h2>Submit Your Answer</h2>
-      <p class="fd">Enter your team's answer. Time is auto-filled. Answers go to <strong style="color:var(--accent)">QOD_Submissions</strong> tab — Leaderboard untouched.</p>
-      <div class="fr">
-        <div class="fg"><label>Team Name</label><input type="text" id="s-team" placeholder="e.g. Team Vortex"></div>
-        <div class="fg"><label>Phase</label><select id="s-phase"><option value="Phase 1">Phase 1</option><option value="Phase 2">Phase 2</option><option value="Phase 3">Phase 3</option></select></div>
-      </div>
-      <div class="fr">
-        <div class="fg"><label>Question</label><select id="s-q"><option>Q1</option><option>Q2</option><option>Q3</option><option>Q4</option><option>Q5</option><option>Q6</option></select></div>
-        <div class="fg"><label>Submission Time (auto)</label><input type="time" id="s-t" step="1"></div>
-      </div>
-      <div class="fg" style="margin-bottom:14px;"><label>Your Answer</label><textarea id="s-a" placeholder="Type your answer here…"></textarea></div>
-      <button class="sbtn" onclick="doSubmit()">Submit Answer →</button>
-      <div class="gsi"><div class="gsd"></div>Writes to: <strong>QOD_Submissions</strong> &nbsp;·&nbsp; Reads: <strong>QOD_Config</strong> &nbsp;·&nbsp; Leaderboard: <strong>untouched ✓</strong></div>
-    </div>
-  </div>
+        <div class="hrow lk" id="h-p3-0">
+          <div class="hi">💡</div>
+          <div class="htw">
+            <div class="hl">Hint 1</div>
+            <div class="hc blur">
+              Filter the logs where critical is True.<br>
+              Sort by timestamp.<br>
+              Read the notes column in order.
+            </div>
+          </div>
+          <span class="hbg lk">Locked</span>
+        </div>
 
-  <!-- ═══ LOG ═══ -->
-  <div class="tp" id="tab-log">
-    <div class="fc">
-      <h2>Submission Log</h2>
-      <p class="fd">All answers this session, newest first.</p>
-      <div class="sr ld" id="sr"><div class="sd"></div><span>Connecting to Google Sheets…</span></div>
-      <div class="twrap">
-        <table>
-          <thead><tr><th>Time</th><th>Team</th><th>Phase</th><th>Q</th><th>Answer</th></tr></thead>
-          <tbody id="lb"><tr><td colspan="5" class="empty-r">No submissions yet.</td></tr></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+        <div class="hrow lk" id="h-p3-1">
+          <div class="hi">💡</div>
+          <div class="htw">
+            <div class="hl">Hint 2</div>
+            <div class="hc blur">
+              Load the JSON file.<br>
+              Compare expected entries to present.<br>
+              Subtract to find what is missing.<br>
+              Check which node was tampered most.
+            </div>
+          </div>
+          <span class="hbg lk">Locked</span>
+        </div>
 
-  <div style="text-align:center;margin-top:28px;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">
-    Syncs every <span style="color:var(--accent)">5s</span> · Tesseract Labs · Google Sheets
+        <div class="hrow lk" id="h-p3-2">
+          <div class="hi">💡</div>
+          <div class="htw">
+            <div class="hl">Hint 3</div>
+            <div class="hc blur">
+              Read the file and find all FRAGMENT lines.<br>
+              Decode each one using BASE64.<br>
+              Two will sound like system reports.
+            </div>
+          </div>
+          <span class="hbg lk">Locked</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div><!-- /p3-content -->
+
+</div><!-- /tab-p3 -->
+<!-- ═══ SUBMIT ═══ -->
+<div class="tp" id="tab-sub">
+
+  <div class="fc">
+
+    <h2>☠ File Your Report</h2>
+
+    <p class="fd">
+      Submit your team's findings for each phase.<br>
+      All entries are logged to the 
+      <strong style="color:var(--accent)">QOD_Submissions</strong> sheet in real time.
+    </p>
+
+    <!-- REQUIREMENTS -->
+    <div class="hlb cy" style="font-size:.8rem;line-height:1.8;margin:18px 0;">
+
+      <strong>Submission Guidelines:</strong><br><br>
+
+      <strong style="color:var(--amber)">Phase 1</strong><br>
+      • Three common threads linking all victims<br>
+      • Environmental changes observed<br>
+      • System and connection tying them together<br><br>
+
+      <strong style="color:var(--accent)">Phase 2</strong><br>
+      • Employees with elevated system access<br>
+      • Suspicious communication patterns (and why they stand out)<br>
+      • Financial anomalies — connection or misdirection<br><br>
+
+      <strong style="color:var(--green)">Phase 3</strong><br>
+      • Override log anomalies identified<br>
+      • Missing/deleted entries and most tampered node<br>
+      • Decoded BASE64 fragment — name and ID revealed
+
+    </div>
+
+    <!-- FORM -->
+    <div class="fr">
+
+      <div class="fg">
+        <label>Phase</label>
+        <select id="s-phase"
+          onfocus="this.style.boxShadow='0 0 0 2px rgba(0,170,255,0.5)'"
+          onblur="this.style.boxShadow='0 0 0 1px rgba(0,170,255,0.25)'"
+          style="
+            width:100%;
+            padding:12px 14px;
+            border-radius:8px;
+            border:1px solid rgba(0,170,255,0.3);
+            background:#0f172a;
+            color:#fff;
+            font-size:.9rem;
+            box-shadow:0 0 0 1px rgba(0,170,255,0.25);
+          ">
+          <option value="">— Select Phase —</option>
+          <option value="Phase 1">Phase 1</option>
+          <option value="Phase 2">Phase 2</option>
+          <option value="Phase 3">Phase 3</option>
+        </select>
+      </div>
+
+      <div class="fg">
+        <label>Team Name</label>
+        <input type="text" id="s-team" placeholder="e.g. Team Vortex"
+          onfocus="this.style.boxShadow='0 0 0 2px rgba(0,170,255,0.5)'"
+          onblur="this.style.boxShadow='0 0 0 1px rgba(0,170,255,0.25)'"
+          style="
+            width:100%;
+            padding:12px 14px;
+            border-radius:8px;
+            border:1px solid rgba(0,170,255,0.3);
+            background:#0f172a;
+            color:#fff;
+            font-size:.9rem;
+            box-shadow:0 0 0 1px rgba(0,170,255,0.25);
+          ">
+      </div>
+
+    </div>
+
+    <div class="fr">
+
+      <div class="fg">
+        <label>Submission Time</label>
+        <input type="text" id="s-t" readonly placeholder="Auto-captured on submit"
+          style="
+            width:100%;
+            padding:12px 14px;
+            border-radius:8px;
+            border:1px solid rgba(0,170,255,0.3);
+            background:#0f172a;
+            color:#aaa;
+            font-size:.9rem;
+            box-shadow:0 0 0 1px rgba(0,170,255,0.2);
+          ">
+      </div>
+
+      <div class="fg"></div>
+
+    </div>
+
+    <!-- BIG ANSWER BOX -->
+    <div class="fg" style="margin-top:14px;margin-bottom:18px;">
+      <label>Your Answer</label>
+      <textarea id="s-a"
+        placeholder="Enter your findings, suspect name, or analysis…"
+        onfocus="this.style.boxShadow='0 0 0 2px rgba(0,170,255,0.6)'"
+        onblur="this.style.boxShadow='0 0 0 1px rgba(0,170,255,0.25)'"
+        style="
+          width:100%;
+          min-height:200px;
+          padding:16px 18px;
+          border-radius:12px;
+          border:1px solid rgba(0,170,255,0.4);
+          background:#0b1220;
+          color:#fff;
+          font-size:.95rem;
+          line-height:1.6;
+          box-shadow:0 0 0 1px rgba(0,170,255,0.25), 0 10px 25px rgba(0,170,255,0.1);
+          resize:vertical;
+        ">
+      </textarea>
+    </div>
+
+    <!-- BUTTON -->
+    <button class="sbtn" onclick="doSubmit()"
+      style="
+        padding:12px 22px;
+        border-radius:8px;
+        font-weight:600;
+        background:linear-gradient(135deg,#00aaff,#0077ff);
+        color:#fff;
+        border:none;
+        box-shadow:0 6px 18px rgba(0,170,255,0.3);
+        cursor:pointer;
+      ">
+      ☠ &nbsp;Transmit to Investigation Node →
+    </button>
+
+    <!-- SYSTEM INFO -->
+    <div class="gsi" style="margin-top:12px;">
+      <div class="gsd"></div>
+      Writes to: <strong>QOD_Submissions</strong> &nbsp;·&nbsp; 
+      Reads: <strong>QOD_Config</strong>
+    </div>
+
   </div>
 
 </div>
 
-<!-- ALERT OVERLAY -->
-<div class="ao" id="ao">
-  <div class="ab">
-    <span class="ask">💀</span>
-    <div class="atb" id="a-badge">Alert</div>
-    <div class="att" id="a-title">Time Warning</div>
-    <div class="amsg" id="a-msg">Time is running out.</div>
-    <button class="acl" onclick="document.getElementById('ao').classList.remove('show')">Acknowledge &amp; Continue</button>
-  </div>
+<!-- FOOTER -->
+<div style="text-align:center;margin-top:28px;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">
+  Syncs every <span style="color:var(--accent)">5s</span> · Tesseract Labs · Google Sheets
 </div>
 
-<div class="toast" id="toast">📡 Answer Submitted</div>
+<!-- TOAST -->
+<div class="toast" id="toast">
+  📡 Transmission Received — Your report has been logged.
+</div>
 
 <script>
 // ═══════════════════════════════════════════════
-// CONFIG — already set
+// CONFIG
 // ═══════════════════════════════════════════════
-var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwzDuKU5Rkdm84h_qhy_ruHeWPy1MSc_q0YiFbVaWrmUY-fQfOhfQx7QoXksB0qZDpe/exec';
-var CONFIG_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQE_L9D0lUpFdEm-vRpJeKEIqtivKQlG3lUQeevsEyscml3AOIxbB-1SX9-TBEF-8g3BQppLrPeClxa/pub?gid=1395849417&single=true&output=csv';
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRovv8BWE1nVHUrk4oD6ZRfL-272LTtekmN4DnnrpQPfZy9W5psTxTDTABrOoZ45q1/exec';
+// Config now served via Apps Script doGet
 
 // Hint text
 var HINTS = {
   'p1':['The cause is not the moment of death.','The system acts before the outcome.','Location does not define the connection.'],
-  'p2':['Access defines capability.','Motive does not guarantee action.','Visibility can mislead.'],
-  'p3':['Perfect data indicates manipulation.','Absence is evidence.','The killer is not visible.']
+ 'p2':[
+  'Identify the subset of employees with elevated privileges by filtering on access level.',
+  'Analyze the content of messages to identify keywords or patterns related to system activity.',
+  'Apply conditional filtering to isolate high-value or flagged transactions.'
+],
+  'p3': [
+  'Filter the logs where critical is True. Sort by timestamp. Read the notes column in order.',
+  'Load the JSON file. Compare expected entries to present. Subtract to find what is missing. Check which node was tampered most.',
+  'Read the file and find all FRAGMENT lines. Decode each one using BASE64. Two will sound like system reports.'
+],
 };
 
 // ═══════════════════════════════════════════════
-// UTILS — defined first
+// UTILS
 // ═══════════════════════════════════════════════
 function pad2(n){return String(n).padStart(2,'0');}
 function fmt(h,m,s){return pad2(h)+':'+pad2(m)+':'+pad2(s);}
@@ -487,10 +965,15 @@ function fmtHM(d){
   h=h%12; if(h===0)h=12;
   return pad2(h)+':'+pad2(m)+' '+ampm;
 }
-function nowStr(){var n=new Date();return pad2(n.getHours())+':'+pad2(n.getMinutes());}
-function setNow(){document.getElementById('s-t').value=nowStr();}
+function nowReadable(){
+  var n=new Date();
+  var h=n.getHours(), m=n.getMinutes(), s=n.getSeconds();
+  var ampm=h>=12?'PM':'AM';
+  h=h%12; if(h===0)h=12;
+  return pad2(h)+':'+pad2(m)+':'+pad2(s)+' '+ampm;
+}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function showToast(){var t=document.getElementById('toast');t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
+function showToast(){var t=document.getElementById('toast');t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3500);}
 
 // ═══════════════════════════════════════════════
 // TABS
@@ -508,284 +991,20 @@ function T(n,b){
 // Phase 1: 150→110 mins remaining
 // Phase 2: 110→60 mins remaining
 // Phase 3: 60→0 mins remaining
-// Alerts:
-//   Phase 1 → 15 mins left = 110+15 = 125 mins total remaining
-//   Phase 2 → 20 mins left = 60+20  = 80  mins total remaining
-//   Phase 3 → 30 mins left = 30     mins total remaining
-//   Phase 3 → 10 mins left = 10     mins total remaining
 // ═══════════════════════════════════════════════
-var evS=null, evE=null;
-var fired={};
-var revealedHints={}; // once revealed, never hide
+// OPTION 1 → fixed clock time
+var evS = new Date();
+evS.setHours(15, 0, 0, 0);   // START TIME (EDIT)
 
-var ALERTS={
-  125:{title:'Phase 1 — 15 Minutes Left', badge:'⚠ Phase 1 Warning', msg:'15 minutes remaining in Phase 1. Finalise your answers on the cause of death and the connection between all victims.'},
-  80: {title:'Phase 2 — 20 Minutes Left', badge:'⚠ Phase 2 Warning', msg:'20 minutes remaining in Phase 2. Narrow down your suspects. Access + Motive + No presence in logs.'},
-  30: {title:'Phase 3 — 30 Minutes Left', badge:'⚠ Phase 3 Warning', msg:'30 minutes remaining in Phase 3. Cross-reference the override logs — the killer hides in the absence of data.'},
-  10: {title:'Critical — 10 Minutes Left', badge:'🚨 Final Warning',   msg:'Only 10 minutes left! Submit your FINAL ANSWER immediately. Will Byers\' fate is in your hands.'}
-};
+var evE = new Date();
+evE.setHours(19, 30, 0, 0);  // END TIME (EDIT)
+var evStartStr='', evEndStr=''; // raw strings from sheet
+var eventLocked=false;          // once event starts, never reset times
+var revealedHints={};           // once revealed, never hide
+var phaseUnlocked={p1:false, p2:false, p3:false};
 
-function tickEvent(){
-  var now=new Date();
-  var dot=document.getElementById('ev-dot');
-  var stEl=document.getElementById('ev-st');
-  var sEl=document.getElementById('ev-s');
-  var eEl=document.getElementById('ev-e');
-  var elEl=document.getElementById('ev-el');
-  var c2=document.getElementById('cd2');
-  var sub=document.getElementById('ev-sub');
-
-  if(!evS||!evE){
-    stEl.textContent='Not Started';
-    c2.textContent='--:--:--';
-    sEl.textContent='--:--';
-    eEl.textContent='--:--';
-    elEl.textContent='--:--:--';
-    sub.textContent='Waiting for organizer to set time…';
-    dot.className='sdot off';
-    updatePhaseBar(-1);
-    return;
-  }
-
-  // Always show start and end times from sheet
-  sEl.textContent=fmtHM(evS);
-  eEl.textContent=fmtHM(evE);
-
-  if(now<evS){
-    // Not started yet — show countdown to start
-    var toStart=Math.floor((evS-now)/1000);
-    stEl.textContent='Not Started';
-    c2.textContent=fmtSec(toStart);
-    sub.textContent='Starts in '+Math.floor(toStart/60)+'m '+toStart%60+'s';
-    elEl.textContent='00:00:00';
-    dot.className='sdot wait';
-    updatePhaseBar(-1);
-    return;
-  }
-
-  if(now>=evE){
-    stEl.textContent='Ended';
-    sEl.textContent=fmtHM(evS);
-    eEl.textContent=fmtHM(evE);
-    var totalDur=Math.floor((evE-evS)/1000);
-    c2.textContent=fmtSec(totalDur);
-    sub.textContent='Event ended · Total duration: '+Math.floor(totalDur/60)+' mins';
-    elEl.textContent=fmtSec(totalDur);
-    dot.className='sdot end';
-    updatePhaseBar(4);
-    return;
-  }
-
-  // Live
-  dot.className='sdot live';
-  stEl.textContent='Live';
-  var elapsed=Math.floor((now-evS)/1000);
-  var remain=Math.floor((evE-now)/1000);
-  var rm=Math.floor(remain/60);
-  elEl.textContent=fmtSec(elapsed);
-  c2.textContent=fmtSec(remain);
-
-  // Phase detection
-  var phase=0;
-  if(rm>110){phase=1; sub.textContent='Phase 1 · '+rm+'m '+Math.floor(remain%60)+'s remaining';}
-  else if(rm>60){phase=2; sub.textContent='Phase 2 · '+rm+'m '+Math.floor(remain%60)+'s remaining';}
-  else{phase=3; sub.textContent='Phase 3 · '+rm+'m '+Math.floor(remain%60)+'s remaining';}
-  updatePhaseBar(phase);
-
-  // Fire alerts
-  [125,80,30,10].forEach(function(m){
-    if(rm<=m && rm>m-1 && !fired[m]){
-      fired[m]=true;
-      showAlert(m);
-    }
-  });
-}
-
-setInterval(tickEvent,1000);
-
-function updatePhaseBar(phase){
-  var p1=document.getElementById('ph1');
-  var p2=document.getElementById('ph2');
-  var p3=document.getElementById('ph3');
-  p1.className='ph-seg'; p2.className='ph-seg'; p3.className='ph-seg';
-  if(phase===1){p1.className='ph-seg active';}
-  else if(phase===2){p1.className='ph-seg done';p2.className='ph-seg active';}
-  else if(phase===3){p1.className='ph-seg done';p2.className='ph-seg done';p3.className='ph-seg active';}
-  else if(phase===4){p1.className='ph-seg done';p2.className='ph-seg done';p3.className='ph-seg done';}
-}
-
-function showAlert(m){
-  var a=ALERTS[m];
-  document.getElementById('a-badge').textContent=a.badge;
-  document.getElementById('a-title').textContent=a.title;
-  document.getElementById('a-msg').textContent=a.msg;
-  document.getElementById('ao').classList.add('show');
-}
-
-// ═══════════════════════════════════════════════
-// GOOGLE SHEETS — poll every 5 seconds
-// ═══════════════════════════════════════════════
-function poll(){
-  var proxies=[
-    'https://api.allorigins.win/raw?url='+encodeURIComponent(CONFIG_URL+'&_='+Date.now()),
-    'https://corsproxy.io/?'+encodeURIComponent(CONFIG_URL+'&_='+Date.now())
-  ];
-  tryProxy(proxies,0);
-}
-
-function tryProxy(proxies,idx){
-  if(idx>=proxies.length){setSR('no','Cannot reach Google Sheets — click Refresh');return;}
-  fetch(proxies[idx])
-    .then(function(r){return r.text();})
-    .then(function(csv){
-      if(!csv||csv.trim()===''){tryProxy(proxies,idx+1);return;}
-      var cfg={};
-      csv.split('\n').forEach(function(row,i){
-        if(i===0 && row.toLowerCase().indexOf('column')!==-1) return;
-        var c=row.split(',');
-        if(c.length>=2){
-          var k=c[0].trim().toLowerCase();
-          var vB=c[1].trim();
-          var vC=c[2]?c[2].trim():'';
-          var v='';
-          if(vC&&(vC.toUpperCase()==='AM'||vC.toUpperCase()==='PM')){
-            if(vB.toUpperCase().indexOf('AM')===-1&&vB.toUpperCase().indexOf('PM')===-1){v=vB+' '+vC;}
-            else{v=vB;}
-          } else {v=vB;}
-          v=v.toLowerCase();
-          if(k&&k!=='column a') cfg[k]=v;
-        }
-      });
-      applyConfig(cfg);
-      setSR('ok','Google Sheets connected · syncing every 5s');
-    })
-    .catch(function(){tryProxy(proxies,idx+1);});
-}
-
-function parseTime(str){
-  // handles both "08:45 AM", "8:45 AM", "08:45 am", "13:00", "08:45"
-  str = str.trim();
-  var ampm = '';
-  if(str.toLowerCase().indexOf('am')!==-1){ ampm='am'; str=str.toLowerCase().replace('am','').trim(); }
-  else if(str.toLowerCase().indexOf('pm')!==-1){ ampm='pm'; str=str.toLowerCase().replace('pm','').trim(); }
-  var parts = str.split(':');
-  var h = parseInt(parts[0])||0;
-  var m = parseInt(parts[1])||0;
-  if(ampm==='am' && h===12) h=0;
-  if(ampm==='pm' && h!==12) h+=12;
-  return {h:h, m:m};
-}
-
-function applyConfig(c){
-  // Always reset first so stale values don't persist
-  var oldStartStr = evS ? fmtHM(evS) : '';
-  var oldEndStr   = evE ? fmtHM(evE) : '';
-  evS=null; evE=null;
-
-  // Event times
-  if(c['event_start'] && c['event_start'].trim()!==''){
-    var t=parseTime(c['event_start']);
-    evS=new Date(); evS.setHours(t.h,t.m,0,0);
-  }
-  if(c['event_end'] && c['event_end'].trim()!==''){
-    var t2=parseTime(c['event_end']);
-    evE=new Date(); evE.setHours(t2.h,t2.m,0,0);
-  }
-
-  // If times changed, reset alerts so they fire fresh
-  var newStartStr = evS ? fmtHM(evS) : '';
-  var newEndStr   = evE ? fmtHM(evE) : '';
-  if(newStartStr !== oldStartStr || newEndStr !== oldEndStr){
-    fired = {};
-  }
-  // Hints
-  ['p1','p2','p3'].forEach(function(ph){
-    [0,1,2].forEach(function(i){
-      var key=ph+'_hint'+(i+1);
-      var val=c[key];
-      setHint(ph,i,(val==='yes'||val==='Yes'));
-    });
-  });
-}
-
-function setHint(ph,i,on){
-  var el=document.getElementById('h-'+ph+'-'+i);
-  if(!el) return;
-  var hc=el.querySelector('.hc');
-  var hbg=el.querySelector('.hbg');
-  var key=ph+'-'+i;
-  hc.textContent=HINTS[ph][i];
-  // Once revealed, never hide again even if sheet changes back to No
-  if(on) revealedHints[key]=true;
-  if(revealedHints[key]){
-    el.classList.remove('lk'); el.classList.add('rv');
-    hc.classList.remove('blur'); hc.classList.add('show');
-    hbg.textContent='Revealed'; hbg.className='hbg rv';
-  } else {
-    el.classList.add('lk'); el.classList.remove('rv');
-    hc.classList.add('blur'); hc.classList.remove('show');
-    hbg.textContent='Locked'; hbg.className='hbg lk';
-  }
-}
-
-function setSR(state,msg){
-  var el=document.getElementById('sr');
-  el.className='sr '+state;
-  el.innerHTML='<div class="sd"></div><span>'+msg+'</span>';
-}
-
-function manualRefresh(){
-  var btn=document.getElementById('rbtn');
-  btn.classList.add('spinning');
-  poll();
-  setTimeout(function(){btn.classList.remove('spinning');},700);
-}
-
-// Start polling every 5 seconds
-poll();
-setInterval(poll,5000);
-
-// ═══════════════════════════════════════════════
-// SUBMISSIONS
-// ═══════════════════════════════════════════════
-var subs=[];
-try{subs=JSON.parse(localStorage.getItem('qod_s')||'[]');}catch(e){}
-renderLog();
-
-function doSubmit(){
-  var team=document.getElementById('s-team').value.trim();
-  var phase=document.getElementById('s-phase').value;
-  var q=document.getElementById('s-q').value;
-  var t=document.getElementById('s-t').value||nowStr();
-  var ans=document.getElementById('s-a').value.trim();
-  if(!team){alert('Please enter your team name.');return;}
-  if(!ans){alert('Please type your answer.');return;}
-  var entry={team:team,phase:phase,q:q,t:t,ans:ans,iso:new Date().toISOString()};
-  subs.unshift(entry);
-  try{localStorage.setItem('qod_s',JSON.stringify(subs));}catch(e){}
-  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(entry)}).catch(function(){});
-  renderLog();
-  showToast();
-  document.getElementById('s-a').value='';
-  setNow();
-  setTimeout(function(){
-    document.querySelectorAll('.tp').forEach(function(p){p.classList.remove('on');});
-    document.querySelectorAll('.tbtn').forEach(function(b){b.classList.remove('on');});
-    document.getElementById('tab-log').classList.add('on');
-    document.getElementById('ltb').classList.add('on');
-  },700);
-}
-
-function renderLog(){
-  var tb=document.getElementById('lb');
-  if(!subs.length){tb.innerHTML='<tr><td colspan="5" class="empty-r">No submissions yet.</td></tr>';return;}
-  tb.innerHTML=subs.map(function(s){
-    var c=s.phase==='Phase 1'?'tg1':s.phase==='Phase 2'?'tg2':'tg3';
-    return '<tr><td><span class="ts">'+s.t+'</span></td><td>'+esc(s.team)+'</td><td><span class="tg '+c+'">'+s.phase+'</span></td><td style="color:var(--accent);font-size:.7rem;letter-spacing:2px">'+s.q+'</td><td><div class="ac">'+esc(s.ans)+'</div></td></tr>';
-  }).join('');
-}
-
-setNow();
-</script>
-</body>
-</html>
+function tryPhase(ph, btn){
+  if(!phaseUnlocked[ph]){
+    // Shake the button to indicate locked
+    btn.style.transform='translateX(-4px)';
+    setTimeout(f
