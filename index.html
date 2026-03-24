@@ -629,7 +629,8 @@ input[readonly]{color:var(--green);border-color:rgba(0,204,102,.2);background:rg
 
       <div class="sec-div">— Investigation Tasks —</div>
 
-      <p class="bt"><strong>1. Capability</strong></p>
+      <!-- 1 -->
+      <p class="bt"><strong>1. Internal Access</strong></p>
       <p class="bt">
         The audit team confirms that Project ECHO was not breached.<br>
         There were no signs of forced entry, no external intrusion attempts, and no system vulnerabilities exploited.<br>
@@ -640,59 +641,78 @@ input[readonly]{color:var(--green);border-color:rgba(0,204,102,.2);background:rg
         Your task is to identify who within the organization even has the capability to interact with such critical systems.
       </p>
 
-      <p class="bt" style="margin-top:12px;"><strong>2. Communication Patterns</strong></p>
+      <!-- 2 -->
+      <p class="bt" style="margin-top:12px;"><strong>2. Communication Analysis</strong></p>
       <p class="bt">
         Internal communications were reviewed during the investigation.<br>
         Most conversations appear routine — system checks, status updates, and daily operations.<br>
-        However, a few exchanges stand out.<br>
-        Some employees were unusually active.<br>
-        Others mentioned irregularities in the system before the incidents occurred.<br>
-        Activity alone doesn’t mean intent.<br>
-        But patterns in communication can reveal more than direct evidence.
+        However, a few exchanges stand out.
+      </p>
+      <p class="bt">
+        • Some employees were unusually active<br>
+        • Others mentioned irregularities in the system before the incidents occurred<br>
+        • Activity alone doesn’t mean intent<br>
+        • Patterns in communication can reveal more than direct evidence
       </p>
       <p class="bt">
         Your task is to identify which employees stand out — and more importantly, why.
       </p>
 
-      <p class="bt" style="margin-top:12px;"><strong>3. Financial Signals</strong></p>
+      <!-- 3 -->
+      <p class="bt" style="margin-top:12px;"><strong>3. Financial Analysis</strong></p>
       <p class="bt">
-        Financial records were also flagged during the audit.<br>
-        Several employees show irregular transactions — unusual amounts, flagged entries, and external links.<br>
-        At first glance, this suggests possible motive.<br>
-        But not every suspicious trail leads to the truth.<br>
-        Some anomalies may be distractions… or something else entirely.
+        As part of the investigation, financial records of employees linked to Project ECHO were reviewed.<br>
+        Several irregular transactions were identified — unusually high amounts and flagged entries.
       </p>
       <p class="bt">
-        Your task is to determine whether these financial patterns actually connect to the incident — or if they mislead the investigation.
+        • One employee appears more prominent than the others at first glance<br>
+        • However, similar patterns are observed across multiple employees
+      </p>
+      <p class="bt">
+        This raises an important question:<br>
+        Do these financial irregularities point to a specific suspect, or do they simply introduce multiple possibilities?
       </p>
 
+      <!-- HINTS -->
       <div class="sec-div">— Hints —</div>
 
       <div class="hlist">
 
+        <!-- Hint 1 -->
         <div class="hrow lk" id="h-p2-0">
           <div class="hi">💡</div>
           <div class="htw">
             <div class="hl">Hint 1</div>
-            <div class="hc blur">Identify the subset of employees with elevated privileges by filtering on access level.</div>
+            <div class="hc blur">
+              • Identify the subset of employees with elevated privileges by filtering on access level.
+            </div>
           </div>
           <span class="hbg lk">Locked</span>
         </div>
 
+        <!-- Hint 2 -->
         <div class="hrow lk" id="h-p2-1">
           <div class="hi">💡</div>
           <div class="htw">
             <div class="hl">Hint 2</div>
-            <div class="hc blur">Analyze the content of messages to identify keywords or patterns related to system activity.</div>
+            <div class="hc blur">
+              • Not all messages are routine. Look for messages that reference people, systems, or unusual events.<br>
+              • Some messages mention specific individuals or events that have not yet occurred.<br>
+              • Focus on messages that seem out of place compared to normal system communication.<br>
+              (Will Byers is the next target)
+            </div>
           </div>
           <span class="hbg lk">Locked</span>
         </div>
 
+        <!-- Hint 3 -->
         <div class="hrow lk" id="h-p2-2">
           <div class="hi">💡</div>
           <div class="htw">
             <div class="hl">Hint 3</div>
-            <div class="hc blur">Apply conditional filtering to isolate high-value or flagged transactions.</div>
+            <div class="hc blur">
+              • Apply conditional filtering to isolate high-value or flagged transactions.
+            </div>
           </div>
           <span class="hbg lk">Locked</span>
         </div>
@@ -704,7 +724,6 @@ input[readonly]{color:var(--green);border-color:rgba(0,204,102,.2);background:rg
   </div><!-- /p2-content -->
 
 </div><!-- /tab-p2 -->
-
 
 <!-- ═══ PHASE 3 ═══ -->
 <div class="tp" id="tab-p3">
@@ -994,9 +1013,9 @@ var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRovv8BWE1nVHUrk4oD6Z
 // Hint text
 var HINTS = {
   'p1':['The cause is not the moment of death.','The system acts before the outcome.','Location does not define the connection.'],
- 'p2':[
+ 'p2': [
   'Identify the subset of employees with elevated privileges by filtering on access level.',
-  'Analyze the content of messages to identify keywords or patterns related to system activity.',
+  'Not all messages are routine. Look for messages that reference people, systems, or unusual events. Some messages mention specific individuals or events that have not yet occurred. Focus on messages that seem out of place compared to normal system communication. (Will Byers is the next target)',
   'Apply conditional filtering to isolate high-value or flagged transactions.'
 ],
   'p3': [
